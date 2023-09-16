@@ -46,7 +46,7 @@ def run_git_download():
   !git clone https://github.com/BlafKing/sd-civitai-browser-plus /content/{sddir}/extensions/sd-civitai-browser-plus
 
   !curl -Lo "/content/{sddir}/models/VAE/vae-ft-mse-840000-ema-pruned.safetensors" https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
-  !curl -Lo "/content/{sddir}/models/VAE/kl-f8-anime2.ckpt" "https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt"
+  !curl -Lo "/content/{sddir}/models/VAE/kl-f8-anime2.ckpt" 'https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt'
   !curl -Lo "/content/{sddir}/models/VAE/animevae.pt" https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt
 
   if os.path.exists(f'/content/{sddir}/embeddings'):
@@ -74,7 +74,7 @@ def run_aria2c_download():
   #!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_softedge_fp16.safetensors -d /content/{sd}/models/ControlNet -o control_v11p_sd15_softedge.safetensors
   #!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15s2_lineart_anime_fp16.safetensors -d /content/{sd}/models/ControlNet -o control_v11p_sd15s2_lineart_anime.safetensors
   #!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11f1e_sd15_tile_fp16.safetensors -d /content/{sd}/models/ControlNet -o control_v11f1e_sd15_tile_fp16.safetensors
-  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M 'https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth' -d /content/{sddir}/models/ESRGAN/ -o 4x-UltraSharp.pth
+  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d /content/{sddir}/models/ESRGAN/ -o 4x-UltraSharp.pth 'https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth'
   !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d /content/{sddir}/extensions/a1111-sd-{wi}-tagcomplete/tags -o CN.csv
   end_time = time.time()
   print("aria2c完成下载耗时：", end_time-start_time, "秒")
