@@ -15,7 +15,7 @@ sd=f"{sd0}{sd1}-{wi}"
 sdir="drive/MyDrive/sd"
 sddir='colab'
 
-!apt-get -y install -qq aria2
+apt-get -y install -qq aria2
 if os.path.exists(f'/content/{sddir}'):
   shutil.rmtree(f'/content/{sddir}')
 !mkdir /content/models
