@@ -74,7 +74,7 @@ def run_aria2c_download():
   #!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15_softedge_fp16.safetensors -d /content/{sd}/models/ControlNet -o control_v11p_sd15_softedge.safetensors
   #!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11p_sd15s2_lineart_anime_fp16.safetensors -d /content/{sd}/models/ControlNet -o control_v11p_sd15s2_lineart_anime.safetensors
   #!aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/resolve/main/control_v11f1e_sd15_tile_fp16.safetensors -d /content/{sd}/models/ControlNet -o control_v11f1e_sd15_tile_fp16.safetensors
-  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d /content/{sddir}/models/ESRGAN/ -o 4x-UltraSharp.pth
+  !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M 'https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth' -d /content/{sddir}/models/ESRGAN/ -o 4x-UltraSharp.pth
   !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d /content/{sddir}/extensions/a1111-sd-{wi}-tagcomplete/tags -o CN.csv
   end_time = time.time()
   print("aria2c完成下载耗时：", end_time-start_time, "秒")
