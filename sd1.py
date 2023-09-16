@@ -48,7 +48,7 @@ def run_git_download():
   !git clone https://github.com/BlafKing/sd-civitai-browser-plus /content/{sddir}/extensions/sd-civitai-browser-plus
 
   !curl -Lo "/content/{sddir}/models/VAE/vae-ft-mse-840000-ema-pruned.safetensors" https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
-  !curl -Lo "/content/{sddir}/models/VAE/kl-f8-anime2.ckpt" https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt
+  !curl -Lo "/content/{sddir}/models/VAE/kl-f8-anime2.ckpt" "https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt"
   !curl -Lo "/content/{sddir}/models/VAE/animevae.pt" https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt
 
   if os.path.exists(f'/content/{sddir}/embeddings'):
