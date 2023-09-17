@@ -16,15 +16,10 @@ for arg in sys.argv[1:]:
 #subprocess.run(f'cd {params["dir"]}/',shell=True)
 print(params["sd_dir"])
 
-wi="w"+"ebui"
-sd="stable-diffusion-webui"
-sdir="drive/MyDrive/sd"
-sddir='colab'
 
-!apt-get -y install -qq aria2
 if os.path.exists(f'/content/{sddir}'):
   shutil.rmtree(f'/content/{sddir}')
-!mkdir /content/models
 
-subprocess.run(f'cd {params["dir"]}/',shell=True)
-subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["dir"]}',shell=True)
+
+subprocess.run(f'cd {params["sd_dir"]}/',shell=True)
+subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["sd_dir"]}',shell=True)
