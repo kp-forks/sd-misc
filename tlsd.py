@@ -92,7 +92,7 @@ css_content = '''
     }
   }
   '''
-with open(f'/content/{params["sd_dir"]}/style.css', 'a') as cssFile:
+with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
 
