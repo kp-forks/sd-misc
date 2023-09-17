@@ -112,7 +112,7 @@ ckpt_url = ckpts[ckpt]
 if ckpt_url:
       download_url = ckpt_url
       download_dir = "/content/models"
-      !aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {download_dir} {download_url}
+      subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {download_dir} {download_url}',shell=True)
 
 
 full_precision_str="--share --lowram --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
