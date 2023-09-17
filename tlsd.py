@@ -33,19 +33,38 @@ def run_git_download():
  subprocess.run(f'git clone https://github.com/zanllp/sd-webui-infinite-image-browsing {params["sd_dir"]}/extensions/sd-webui-infinite-image-browsing',shell=True)
  subprocess.run(f'git clone https://github.com/BlafKing/sd-civitai-browser-plus {params["sd_dir"]}/extensions/sd-civitai-browser-plus',shell=True)
  
- if os.path.exists(f'{params["dir"]}/embeddings'):
-  shutil.rmtree(f'{params["dir"]}/embeddings')
- subprocess.run(f'git clone https://huggingface.co/nolanaatama/embeddings {params["dir"]}/embeddings',shell=True)
+ if os.path.exists(f'{params["sd_dir"]}/embeddings'):
+  shutil.rmtree(f'{params["sd_dir"]}/embeddings')
+ subprocess.run(f'git clone https://huggingface.co/nolanaatama/embeddings {params["sd_dir"]}/embeddings',shell=True)
  
  end_time=time.time()
  print("git spent",end_time-start_time,"s")
-
 def run_aria2c_download():
  start_time=time.time()
-
- subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
- subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True)
+ subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["sd_dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
+ subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True) 
+ ckpts = {
+    "none": "",
+    "XXMix_9realistic": "https://civitai.com/api/download/models/102222",
+    "chilloutmix": "https://civitai.com/api/download/models/11732",
+    "majicMIX realistic": "https://civitai.com/api/download/models/94640",
+    "moyou": "https://civitai.com/api/download/models/153751",
+    "majicMIX sombre": "https://civitai.com/api/download/models/75209",
+    "chilledReGenericV3_v10.safetensors": "https://huggingface.co/onionex/chilledReGenericV3_v10/resolve/main/chilledReGenericV3_v10.safetensors"
+ }
+ ckpt = "XXMix_9realistic"
+ ckpt_url = ckpts[ckpt]
+ if ckpt_url:
+      download_url = ckpt_url
+      download_dir = "/content/models"
+      subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {download_dir} {download_url}',shell=True)
+ 
  end_time=time.time()
+
+ 
+ 
+ 
+ 
  print("aria2c spent",end_time-start_time,"s")
  
 def curl_download(): 
@@ -54,7 +73,7 @@ def curl_download():
  subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/kl-f8-anime2.ckpt' https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt",shell=True)
  subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/animevae.pt' https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt",shell=True)
  end_time=time.time()
- print("curl spent",end_time-start_time,"s")
+ print("\ncurl spent",end_time-start_time,"s")
 
 
 
@@ -65,12 +84,12 @@ def wget_download():
  os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
  subprocess.run("sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev",shell=True)
  end_time=time.time()
- print("wget spent",end_time-start_time,"s")
+ print("\nwget spent",end_time-start_time,"s")
 def pip_download():
  start_time=time.time()
  subprocess.run("pip install xformers xformers==0.0.20",shell=True)
  end_time=time.time()
- print("pip spent",end_time-start_time,"s")
+ print("\npip spent",end_time-start_time,"s")
 
 executor=concurrent.futures.ThreadPoolExecutor(max_workers=5)
 task1=executor.submit(run_git_download)
@@ -96,23 +115,6 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
 
-ckpts = {
-    "none": "",
-    "XXMix_9realistic": "https://civitai.com/api/download/models/102222",
-    "chilloutmix": "https://civitai.com/api/download/models/11732",
-    "majicMIX realistic": "https://civitai.com/api/download/models/94640",
-    "moyou": "https://civitai.com/api/download/models/153751",
-    "majicMIX sombre": "https://civitai.com/api/download/models/75209",
-    "chilledReGenericV3_v10.safetensors": "https://huggingface.co/onionex/chilledReGenericV3_v10/resolve/main/chilledReGenericV3_v10.safetensors"
-}
-
-
-ckpt = "XXMix_9realistic"
-ckpt_url = ckpts[ckpt]
-if ckpt_url:
-      download_url = ckpt_url
-      download_dir = "/content/models"
-      subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {download_dir} {download_url}',shell=True)
 
 
 full_precision_str="--share --lowram --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
