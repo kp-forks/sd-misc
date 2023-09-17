@@ -13,13 +13,11 @@ for arg in sys.argv[1:]:
   if len(key_value)==2:
    key,value=key_value
    params[key]=value
-#subprocess.run(f'cd {params["dir"]}/',shell=True)
+
 print(params["sd_dir"])
 
 
-if os.path.exists(f'/content/{sddir}'):
-  shutil.rmtree(f'/content/{sddir}')
+if os.path.exists(f'/content/{sd_dir}'):
+  shutil.rmtree(f'/content/{sd_dir}')
 
-
-subprocess.run(f'cd {params["sd_dir"]}/',shell=True)
 subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["sd_dir"]}',shell=True)
