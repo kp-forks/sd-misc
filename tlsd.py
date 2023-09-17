@@ -25,7 +25,6 @@ sddir='colab'
 if os.path.exists(f'/content/{sddir}'):
   shutil.rmtree(f'/content/{sddir}')
 !mkdir /content/models
-!wget -O /content/main2.py https://github.com/{user}/colab_{tools}/raw/main/main2.py
 
 subprocess.run(f'cd {params["dir"]}/',shell=True)
 subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["dir"]}',shell=True)
