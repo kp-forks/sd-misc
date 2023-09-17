@@ -45,12 +45,16 @@ def run_aria2c_download():
 
  subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
  subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True)
+ end_time=time.time()
+ print("aria2c",end_time-start_time,"s")
  
+def curl_download(): 
+ start_time=time.time()
  subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/vae-ft-mse-840000-ema-pruned.safetensors' https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors",shell=True)
  subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/kl-f8-anime2.ckpt' https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt",shell=True)
  subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/animevae.pt' https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt",shell=True)
  end_time=time.time()
- print("aria2c",end_time-start_time,"s")
+ print("curl",end_time-start_time,"s")
 
 
 
