@@ -21,3 +21,88 @@ if os.path.exists(f'/content/{params["sd_dir"]}'):
   shutil.rmtree(f'/content/{params["sd_dir"]}')
 
 subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["sd_dir"]}',shell=True)
+
+
+def run_git_download():
+ start_time = time.time()
+ subprocess.run(f'git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete',shell=True)
+ subprocess.run(f'git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111 {params["sd_dir"]}/extensions/ultimate-upscale',shell=True)
+ subprocess.run(f'git clone https://github.com/hako-mikan/sd-webui-lora-block-weight {params["sd_dir"]}/extensions/sd-webui-lora-block-weight',shell=True)
+ subprocess.run(f'git clone https://github.com/AIrjen/OneButtonPrompt {params["sd_dir"]}/extensions/OneButtonPromp',shell=True)
+ subprocess.run(f'git clone https://github.com/adieyal/sd-dynamic-prompts {params["sd_dir"]}/extensions/sd-dynamic-prompts',shell=True)
+ subprocess.run(f'git clone https://github.com/zanllp/sd-webui-infinite-image-browsing {params["sd_dir"]}/extensions/sd-webui-infinite-image-browsing',shell=True)
+ subprocess.run(f'git clone https://github.com/BlafKing/sd-civitai-browser-plus {params["sd_dir"]}/extensions/sd-civitai-browser-plus',shell=True)
+ 
+ if os.path.exists(f'{params["dir"]}/embeddings'):
+  shutil.rmtree(f'{params["dir"]}/embeddings')
+ subprocess.run(f'git clone https://huggingface.co/nolanaatama/embeddings {params["dir"]}/embeddings',shell=True)
+ 
+ end_time=time.time()
+ print("git",end_time-start_time,"s")
+
+def run_aria2c_download():
+ start_time=time.time()
+
+ subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
+ subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True)
+ 
+ subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/vae-ft-mse-840000-ema-pruned.safetensors' https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors",shell=True)
+ subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/kl-f8-anime2.ckpt' https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt",shell=True)
+ subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/animevae.pt' https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt",shell=True)
+ end_time=time.time()
+ print("aria2c",end_time-start_time,"s")
+
+
+
+def wget_download():
+ start_time=time.time()
+ subprocess.run("apt install libunwind8-dev -yqq",shell=True)
+ os.environ["LD_PRELOAD"]="libtcmalloc.so.4"
+ os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
+ subprocess.run("sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev",shell=True)
+ end_time=time.time()
+ print("wget",end_time-start_time,"s")
+def pip_download():
+ start_time=time.time()
+ subprocess.run("pip install xformers xformers==0.0.20",shell=True)
+ end_time=time.time()
+ print("pip",end_time-start_time,"s")
+
+executor=concurrent.futures.ThreadPoolExecutor(max_workers=5)
+task1=executor.submit(run_git_download)
+task2=executor.submit(run_aria2c_download)
+task3=executor.submit(curl_download)
+task4=executor.submit(wget_download)
+task5=executor.submit(pip_download)
+concurrent.futures.wait([task1,task2,task3,task4,task5])
+
+
+
+css_content = '''
+  @media screen and (max-width: 600px) {
+    .gradio-slider input[type="range"]{
+      display: none;
+    }
+    .gradio-slider input[type="number"]{
+      width: 18em;
+    }
+  }
+  '''
+with open(f'/content/{sddir}/style.css', 'a') as cssFile:
+      cssFile.write(css_content)
+
+
+
+ngrok_auth="2SQXegeslmTVLpXDxqHU1DoCBPw_43axN9HrCsnBZTZokFPaA"
+
+full_precision_str="--share --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
+#full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
+
+full_precision_str+=" --theme='dark'"
+
+
+
+
+subprocess.run(f"python launch.py {full_precision_str} --ui-settings-file {params['uiconfig_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir'] --ckpt-dir {params['ckpt_dir'] --ui-config-file {params['config_dir'] --exit}",shell=True)\n'
+
+clear_output()
