@@ -13,8 +13,8 @@ for arg in sys.argv[1:]:
   if len(key_value)==2:
    key,value=key_value
    params[key]=value
-subprocess.run(f'cd {params["dir"]}/',shell=True)
-
+#subprocess.run(f'cd {params["dir"]}/',shell=True)
+print(params["sd_dir"])
 
 wi="w"+"ebui"
 sd="stable-diffusion-webui"
