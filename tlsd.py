@@ -17,7 +17,7 @@ for arg in sys.argv[1:]:
 print(params["sd_dir"])
 
 
-if os.path.exists(f'/content/{sd_dir}'):
-  shutil.rmtree(f'/content/{sd_dir}')
+if os.path.exists(f'/content/{params["sd_dir"]}'):
+  shutil.rmtree(f'/content/{params["sd_dir"]}')
 
 subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["sd_dir"]}',shell=True)
