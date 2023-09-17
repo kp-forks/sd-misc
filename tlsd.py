@@ -14,9 +14,6 @@ for arg in sys.argv[1:]:
    key,value=key_value
    params[key]=value
 
-print(params["sd_dir"])
-
-
 if os.path.exists(f'/content/{params["sd_dir"]}'):
   shutil.rmtree(f'/content/{params["sd_dir"]}')
 
@@ -38,24 +35,17 @@ def run_git_download():
  subprocess.run(f'git clone https://huggingface.co/nolanaatama/embeddings {params["sd_dir"]}/embeddings',shell=True)
  
  end_time=time.time()
- print("git spent",end_time-start_time,"s")
+ print("\ngit spent",end_time-start_time,"s")
 def run_aria2c_download():
  start_time=time.time()
  subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["sd_dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
  subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True) 
  
- 
- 
  if(params['ckpt_url']):
       subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params['ckpt_dir']} {params['ckpt_url']}',shell=True)
  
- end_time=time.time()
-
- 
- 
- 
- 
- print("aria2c spent",end_time-start_time,"s")
+ end_time=time.time() 
+ print("\naria2c spent",end_time-start_time,"s")
  
 def curl_download(): 
  start_time=time.time()
@@ -64,9 +54,6 @@ def curl_download():
  subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/animevae.pt' https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt",shell=True)
  end_time=time.time()
  print("\ncurl spent",end_time-start_time,"s")
-
-
-
 def wget_download():
  start_time=time.time()
  subprocess.run("apt install libunwind8-dev -yqq",shell=True)
@@ -89,8 +76,6 @@ task4=executor.submit(wget_download)
 task5=executor.submit(pip_download)
 concurrent.futures.wait([task1,task2,task3,task4,task5])
 
-
-
 css_content = '''
   @media screen and (max-width: 600px) {
     .gradio-slider input[type="range"]{
@@ -104,15 +89,10 @@ css_content = '''
 with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
-
-
-
-full_precision_str="--share --lowram --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
+full_precision_str="--share --lowram --no-half-vae --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 #full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
 
 full_precision_str+=" --theme='dark'"
-
-
 
 os.chdir(f'{params["sd_dir"]}')
 subprocess.run(f"python launch.py {full_precision_str} --ui-settings-file {params['uiconfig_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir']} --ckpt-dir {params['ckpt_dir']} --ui-config-file {params['config_dir']}",shell=True)
