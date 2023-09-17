@@ -43,21 +43,11 @@ def run_aria2c_download():
  start_time=time.time()
  subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["sd_dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
  subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True) 
- ckpts = {
-    "none": "",
-    "XXMix_9realistic": "https://civitai.com/api/download/models/102222",
-    "chilloutmix": "https://civitai.com/api/download/models/11732",
-    "majicMIX realistic": "https://civitai.com/api/download/models/94640",
-    "moyou": "https://civitai.com/api/download/models/153751",
-    "majicMIX sombre": "https://civitai.com/api/download/models/75209",
-    "chilledReGenericV3_v10.safetensors": "https://huggingface.co/onionex/chilledReGenericV3_v10/resolve/main/chilledReGenericV3_v10.safetensors"
- }
- ckpt = "XXMix_9realistic"
- ckpt_url = ckpts[ckpt]
- if ckpt_url:
-      download_url = ckpt_url
-      download_dir = "/content/models"
-      subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {download_dir} {download_url}',shell=True)
+ 
+ 
+ 
+ if(params['ckpt_url']):
+      subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params['ckpt_dir']} {params['ckpt_url']}',shell=True)
  
  end_time=time.time()
 
