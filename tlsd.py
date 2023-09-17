@@ -88,12 +88,9 @@ css_content = '''
     }
   }
   '''
-with open(f'/content/{sddir}/style.css', 'a') as cssFile:
+with open(f'/content/{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
-
-
-ngrok_auth="2SQXegeslmTVLpXDxqHU1DoCBPw_43axN9HrCsnBZTZokFPaA"
 
 full_precision_str="--share --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 #full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
@@ -102,7 +99,7 @@ full_precision_str+=" --theme='dark'"
 
 
 
-
+os.chdir(f'{params["sd_dir"]}')\n
 subprocess.run(f"python launch.py {full_precision_str} --ui-settings-file {params['uiconfig_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir'] --ckpt-dir {params['ckpt_dir'] --ui-config-file {params['config_dir'] --exit}",shell=True)\n'
 
 clear_output()
