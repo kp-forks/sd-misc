@@ -58,7 +58,7 @@ def wget_download():
  subprocess.run(f"wget https://github.com/camenduru/gperftools/releases/download/v1.0/libtcmalloc_minimal.so.4 -O /content/libtcmalloc_minimal.so.4",shell=True)
  
  
- #subprocess.run("apt install libunwind8-dev -yqq",shell=True)
+ #subprocess.run("apt install libunwind8-dev -yqq",shell=True) 
  os.environ["LD_PRELOAD"]="/content/libtcmalloc_minimal.so.4"
  #os.environ["LD_PRELOAD"]="libtcmalloc.so.4"
  os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
@@ -67,7 +67,12 @@ def wget_download():
  print("\nwget spent:",end_time-start_time,"s")
 def pip_download():
  start_time=time.time()
- subprocess.run("pip install xformers xformers==0.0.20",shell=True)
+ 
+ 
+ #subprocess.run("pip install xformers xformers==0.0.20",shell=True)
+ subprocess.run("pip install -q xformers==0.0.20 triton==2.0.0 -U",shell=True)
+
+ 
  end_time=time.time()
  print("\npip spent:",end_time-start_time,"s")
 
