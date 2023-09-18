@@ -40,7 +40,7 @@ def run_aria2c_download():
  #subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True) 
  
  if(params['ckpt_url']):
-      subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params["ckpt_dir"]} {params["ckpt_url"]}',shell=True)
+      subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params["ckpt_dir"]} -o {params["ckpt_name"]} {params["ckpt_url"]}',shell=True)
  
  end_time=time.time() 
  print("\naria2c spent:",end_time-start_time,"s")
