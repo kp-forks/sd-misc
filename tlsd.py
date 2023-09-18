@@ -96,6 +96,6 @@ full_precision_str="--share --lowram --disable-safe-unpickle --disable-console-p
 full_precision_str+=" --theme='dark'"
 
 os.chdir(f'{params["sd_dir"]}')
-subprocess.run(f"python launch.py {full_precision_str} --ui-settings-file {params['uiconfig_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir']} --ckpt-dir {params['ckpt_dir']} --ui-config-file {params['config_dir']}",shell=True)
+subprocess.run(f"python launch.py {full_precision_str} --ui-settings-file {params['config_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir']} --ckpt-dir {params['ckpt_dir']} --ui-config-file {params['uiconfig_dir']}",shell=True)
 
 
