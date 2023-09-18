@@ -54,6 +54,13 @@ def curl_download():
  print("\ncurl spent:",end_time-start_time,"s")
 def wget_download():
  start_time=time.time()
+
+ !wget https://github.com/camenduru/gperftools/releases/download/v1.0/libtcmalloc_minimal.so.4 -O /content/libtcmalloc_minimal.so.4
+ %env LD_PRELOAD=/content/libtcmalloc_minimal.so.4
+ triton==2.0.0
+ 
+ 
+ 
  subprocess.run("apt install libunwind8-dev -yqq",shell=True)
  os.environ["LD_PRELOAD"]="libtcmalloc.so.4"
  os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
@@ -87,7 +94,7 @@ css_content = '''
 with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
-full_precision_str="--share --lowram --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
+full_precision_str="--share --lowram --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api --multiple --listen"
 #full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
 
 full_precision_str+=" --theme='dark'"
