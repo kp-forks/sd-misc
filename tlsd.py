@@ -55,14 +55,12 @@ def curl_download():
 def wget_download():
  start_time=time.time()
 
- !wget https://github.com/camenduru/gperftools/releases/download/v1.0/libtcmalloc_minimal.so.4 -O /content/libtcmalloc_minimal.so.4
- %env LD_PRELOAD=/content/libtcmalloc_minimal.so.4
- triton==2.0.0
+ subprocess.run(f"wget https://github.com/camenduru/gperftools/releases/download/v1.0/libtcmalloc_minimal.so.4 -O /content/libtcmalloc_minimal.so.4",shell=True)
  
  
- 
- subprocess.run("apt install libunwind8-dev -yqq",shell=True)
- os.environ["LD_PRELOAD"]="libtcmalloc.so.4"
+ #subprocess.run("apt install libunwind8-dev -yqq",shell=True)
+ os.environ["LD_PRELOAD"]="/content/libtcmalloc_minimal.so.4"
+ #os.environ["LD_PRELOAD"]="libtcmalloc.so.4"
  os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
  subprocess.run("sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev",shell=True)
  end_time=time.time()
