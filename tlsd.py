@@ -14,9 +14,6 @@ for arg in sys.argv[1:]:
    key,value=key_value
    params[key]=value
 
-if os.path.exists(f'/content/{params["sd_dir"]}'):
-  shutil.rmtree(f'/content/{params["sd_dir"]}')
-
 subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["sd_dir"]}',shell=True)
 
 
@@ -36,25 +33,25 @@ def run_git_download():
  subprocess.run(f'git clone https://huggingface.co/nolanaatama/embeddings {params["sd_dir"]}/embeddings',shell=True)
  
  end_time=time.time()
- print("\ngit spent",end_time-start_time,"s")
+ print("\ngit spent:",end_time-start_time,"s")
 def run_aria2c_download():
  start_time=time.time()
- subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["sd_dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
- subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True) 
+ #subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth -d {params["sd_dir"]}/models/ESRGAN/ -o 4x-UltraSharp.pth',shell=True)
+ #subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/datasets/daasd/CN.csv/resolve/main/CN.csv -d {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete/tags -o CN.csv',shell=True) 
  
  if(params['ckpt_url']):
       subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params["ckpt_dir"]} {params["ckpt_url"]}',shell=True)
  
  end_time=time.time() 
- print("\naria2c spent",end_time-start_time,"s")
+ print("\naria2c spent:",end_time-start_time,"s")
  
 def curl_download(): 
  start_time=time.time()
  subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/vae-ft-mse-840000-ema-pruned.safetensors' https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors",shell=True)
- subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/kl-f8-anime2.ckpt' https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt",shell=True)
- subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/animevae.pt' https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt",shell=True)
+ #subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/kl-f8-anime2.ckpt' https://huggingface.co/hakurei/waifu-diffusion-v1-4/resolve/4c4f05104055c029ad577c18ac176462f0d1d7c1/vae/kl-f8-anime2.ckpt",shell=True)
+ #subprocess.run(f"curl -Lo '{params['sd_dir']}/models/VAE/animevae.pt' https://huggingface.co/swl-models/animvae/resolve/main/animevae.pt",shell=True)
  end_time=time.time()
- print("\ncurl spent",end_time-start_time,"s")
+ print("\ncurl spent:",end_time-start_time,"s")
 def wget_download():
  start_time=time.time()
  subprocess.run("apt install libunwind8-dev -yqq",shell=True)
@@ -62,12 +59,12 @@ def wget_download():
  os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
  subprocess.run("sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev",shell=True)
  end_time=time.time()
- print("\nwget spent",end_time-start_time,"s")
+ print("\nwget spent:",end_time-start_time,"s")
 def pip_download():
  start_time=time.time()
  subprocess.run("pip install xformers xformers==0.0.20",shell=True)
  end_time=time.time()
- print("\npip spent",end_time-start_time,"s")
+ print("\npip spent:",end_time-start_time,"s")
 
 executor=concurrent.futures.ThreadPoolExecutor(max_workers=5)
 task1=executor.submit(run_git_download)
@@ -90,7 +87,7 @@ css_content = '''
 with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
-full_precision_str="--share --lowram --disable-safe-unpickle --disable-console-progressbars --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
+full_precision_str="--share --lowram --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 #full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
 
 full_precision_str+=" --theme='dark'"
