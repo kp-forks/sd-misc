@@ -97,7 +97,7 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
 
 print('aaaaaaaaaaaaa')
 print(params['sd_dir'])
-print(params['user_arguments'])
+print(params['arguments'])
 
 full_precision_str = params['user_arguments'] + " --share --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api --multiple --listen --gradio-queue"
 #full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
