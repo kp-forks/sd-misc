@@ -60,7 +60,7 @@ def task4():
  subprocess.run("apt install libunwind8-dev -yqq",shell=True) 
  os.environ["LD_PRELOAD"]="libtcmalloc.so.4"
  os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
- subprocess.run("sudo apt-get install sox ffmpeg libcairo2 libcairo2-dev",shell=True)
+ subprocess.run("apt install sox ffmpeg libcairo2 libcairo2-dev",shell=True)
  end_time=time.time()
  print("\ntask4 spent:",end_time-start_time,"s")
 def task5():
