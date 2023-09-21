@@ -26,7 +26,7 @@ def task1():
  subprocess.run(f'git clone https://github.com/hako-mikan/sd-webui-lora-block-weight {params["sd_dir"]}/extensions/sd-webui-lora-block-weight',shell=True)
  subprocess.run(f'git clone https://github.com/AIrjen/OneButtonPrompt {params["sd_dir"]}/extensions/OneButtonPromp',shell=True)
  subprocess.run(f'git clone https://github.com/adieyal/sd-dynamic-prompts {params["sd_dir"]}/extensions/sd-dynamic-prompts',shell=True)
- subprocess.run(f'git clone https://github.com/zanllp/sd-webui-infinite-image-browsing {params["sd_dir"]}/extensions/sd-webui-infinite-image-browsing',shell=True)
+ #subprocess.run(f'git clone https://github.com/zanllp/sd-webui-infinite-image-browsing {params["sd_dir"]}/extensions/sd-webui-infinite-image-browsing',shell=True)
  subprocess.run(f'git clone https://github.com/BlafKing/sd-civitai-browser-plus {params["sd_dir"]}/extensions/sd-civitai-browser-plus',shell=True)
  #subprocess.run(f'git clone https://github.com/camenduru/tunnels {params["sd_dir"]}/extensions/tunnels',shell=True)
 
