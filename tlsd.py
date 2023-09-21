@@ -92,7 +92,7 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
 
-full_precision_str = params['user_arguments'] + " --share --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api --gradio-queue --theme='dark'"
+full_precision_str = params['user_arguments'] + " --share --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api --theme='dark'"
 #full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
 
 full_precision_str+=" --theme='dark'"
