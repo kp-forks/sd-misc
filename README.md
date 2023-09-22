@@ -1,1 +1,1 @@
-自娱自乐
+run start.ipynb in colab
