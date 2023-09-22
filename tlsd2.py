@@ -22,7 +22,7 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"]="3"
 subprocess.run("apt install sox ffmpeg libcairo2 libcairo2-dev",shell=True)
 subprocess.run("pip install -q xformers==0.0.20 triton==2.0.0 -U",shell=True) 
 
-full_precision_str = params['user_arguments'] + " --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast"
+full_precision_str = params['user_arguments'] + " --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --listen --port 8000"
 #full_precision_str="--share --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast"
 
 full_precision_str+=" --theme='dark'"
