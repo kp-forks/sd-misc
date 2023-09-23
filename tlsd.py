@@ -21,12 +21,12 @@ def task1():
  subprocess.run(f'git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete',shell=True)
  subprocess.run(f'git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111 {params["sd_dir"]}/extensions/ultimate-upscale',shell=True)
  subprocess.run(f'git clone https://github.com/hako-mikan/sd-webui-lora-block-weight {params["sd_dir"]}/extensions/sd-webui-lora-block-weight',shell=True)
- subprocess.run(f'git clone https://github.com/AIrjen/OneButtonPrompt {params["sd_dir"]}/extensions/OneButtonPromp',shell=True)
- subprocess.run(f'git clone https://github.com/adieyal/sd-dynamic-prompts {params["sd_dir"]}/extensions/sd-dynamic-prompts',shell=True)
+ #subprocess.run(f'git clone https://github.com/AIrjen/OneButtonPrompt {params["sd_dir"]}/extensions/OneButtonPromp',shell=True)
+ #subprocess.run(f'git clone https://github.com/adieyal/sd-dynamic-prompts {params["sd_dir"]}/extensions/sd-dynamic-prompts',shell=True)
  #subprocess.run(f'git clone https://github.com/zanllp/sd-webui-infinite-image-browsing {params["sd_dir"]}/extensions/sd-webui-infinite-image-browsing',shell=True)
  subprocess.run(f'git clone https://github.com/BlafKing/sd-civitai-browser-plus {params["sd_dir"]}/extensions/sd-civitai-browser-plus',shell=True)
  subprocess.run(f'git clone https://github.com/tangtang30/tunnels {params["sd_dir"]}/extensions/tunnels',shell=True)
- subprocess.run(f'git clone https://github.com/NoCrypt/sd-fast-pnginfo {params["sd_dir"]}/extensions/sd-fast-pnginfo',shell=True)
+ #subprocess.run(f'git clone https://github.com/NoCrypt/sd-fast-pnginfo {params["sd_dir"]}/extensions/sd-fast-pnginfo',shell=True)
  
  if os.path.exists(f'{params["sd_dir"]}/embeddings'):
   shutil.rmtree(f'{params["sd_dir"]}/embeddings')
@@ -92,7 +92,7 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
 
-full_precision_str = params['user_arguments'] + " --listen --cloudflared --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
+full_precision_str = params['user_arguments'] + " --cloudflared --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 #full_precision_str=" --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
 
 full_precision_str+=" --theme='dark'"
