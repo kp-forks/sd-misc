@@ -16,9 +16,6 @@ for arg in sys.argv[1:]:
 
 subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["sd_dir"]}',shell=True)
 
-#subprocess.run(f'git clone -b master --single-branch https://github.com/anapnoe/stable-diffusion-webui-ux {params["sd_dir"]}',shell=True)
-
-
 def task1():
  start_time = time.time()
  subprocess.run(f'git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete',shell=True)
