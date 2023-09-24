@@ -35,7 +35,7 @@ def task1():
  subprocess.run(f'git clone https://github.com/BlafKing/sd-civitai-browser-plus {params["sd_dir"]}/extensions/sd-civitai-browser-plus',shell=True)
  subprocess.run(f'git clone https://github.com/tangtang30/tlt {params["sd_dir"]}/extensions/tunnels',shell=True)
  #subprocess.run(f'git clone https://github.com/NoCrypt/sd-fast-pnginfo {params["sd_dir"]}/extensions/sd-fast-pnginfo',shell=True)
- 
+ subprocess.run(f'git clone https://github.com/jnyfil/sd-webui-localtunnel-client.git {params["sd_dir"]}/extensions/sd-webui-localtunnel-client',shell=True)
  if os.path.exists(f'{params["sd_dir"]}/embeddings'):
   shutil.rmtree(f'{params["sd_dir"]}/embeddings')
  subprocess.run(f'git clone https://huggingface.co/nolanaatama/embeddings {params["sd_dir"]}/embeddings',shell=True)
@@ -94,7 +94,7 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
 
-p_str = params['user_arguments'] + " --listen --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
+p_str = params['user_arguments'] + " --localtunnel --listen --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 if params['ngrok']:
   p_str+=f"  --ngrok={params['ngrok']} --ngrok-region='auto'"
 
