@@ -33,7 +33,7 @@ def task1():
  #subprocess.run(f'git clone https://github.com/adieyal/sd-dynamic-prompts {params["sd_dir"]}/extensions/sd-dynamic-prompts',shell=True)
  #subprocess.run(f'git clone https://github.com/zanllp/sd-webui-infinite-image-browsing {params["sd_dir"]}/extensions/sd-webui-infinite-image-browsing',shell=True)
  subprocess.run(f'git clone https://github.com/BlafKing/sd-civitai-browser-plus {params["sd_dir"]}/extensions/sd-civitai-browser-plus',shell=True)
- subprocess.run(f'git clone https://github.com/tangtang30/tlt {params["sd_dir"]}/extensions/tunnels',shell=True)
+ #subprocess.run(f'git clone https://github.com/tangtang30/tlt {params["sd_dir"]}/extensions/tunnels',shell=True)
  #subprocess.run(f'git clone https://github.com/NoCrypt/sd-fast-pnginfo {params["sd_dir"]}/extensions/sd-fast-pnginfo',shell=True)
  subprocess.run(f'git clone https://github.com/jnyfil/sd-webui-localtunnel-client.git {params["sd_dir"]}/extensions/sd-webui-localtunnel-client',shell=True)
  if os.path.exists(f'{params["sd_dir"]}/embeddings'):
@@ -96,7 +96,7 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
 
 p_str = params['user_arguments'] + " --localtunnel --listen --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 if params['ngrok']:
-  p_str+=f"  --ngrok={params['ngrok']} --ngrok-region='auto'"
+  p_str+=f"  --ngrok={params['ngrok']} --ngrok-region='jp'"
 
 p_str+=" --theme='dark'"
 print(p_str)
