@@ -19,8 +19,10 @@ subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATI
 if(params['ckpt_url']):
   if(params['ckpt_url'].find('civitai')):    
    subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params["ckpt_dir"]} {params["ckpt_url"]}',shell=True)
-else:
+  else:
    print('dowload default ckpt')
+else:
+  print('dowload default ckpt')
  
 def task1():
  start_time = time.time()
@@ -92,12 +94,11 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
 
-full_precision_str = params['user_arguments'] + " --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
-#full_precision_str=" --lowram --disable-safe-unpickle  --disable-console-progressbars --xformers --enable-insecure-extension-access --precision full --no-half --no-half-vae --opt-sub-quad-attention --opt-channelslast --api"
+p_str = params['user_arguments'] + " --no-gradio-queue --listen --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 
-full_precision_str+=" --theme='dark'"
+p_str+=" --theme='dark'"
 
 os.chdir(f'{params["sd_dir"]}')
-subprocess.run(f"python launch.py {full_precision_str} --ui-settings-file {params['config_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir']} --ckpt-dir {params['ckpt_dir']} --ui-config-file {params['uiconfig_dir']}",shell=True)
+subprocess.run(f"python launch.py {p_str} --ui-settings-file {params['config_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir']} --ckpt-dir {params['ckpt_dir']} --ui-config-file {params['uiconfig_dir']}",shell=True)
 
 
