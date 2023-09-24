@@ -35,7 +35,7 @@ def task1():
  subprocess.run(f'git clone https://github.com/BlafKing/sd-civitai-browser-plus {params["sd_dir"]}/extensions/sd-civitai-browser-plus',shell=True)
  #subprocess.run(f'git clone https://github.com/tangtang30/tlt {params["sd_dir"]}/extensions/tunnels',shell=True)
  #subprocess.run(f'git clone https://github.com/NoCrypt/sd-fast-pnginfo {params["sd_dir"]}/extensions/sd-fast-pnginfo',shell=True)
- subprocess.run(f'git clone https://github.com/jnyfil/sd-webui-localtunnel-client.git {params["sd_dir"]}/extensions/sd-webui-localtunnel-client',shell=True)
+ subprocess.run(f'git clone https://github.com/danielmnb1/localtunnel-client {params["sd_dir"]}/extensions/sd-webui-localtunnel-client',shell=True)
  if os.path.exists(f'{params["sd_dir"]}/embeddings'):
   shutil.rmtree(f'{params["sd_dir"]}/embeddings')
  subprocess.run(f'git clone https://huggingface.co/nolanaatama/embeddings {params["sd_dir"]}/embeddings',shell=True)
