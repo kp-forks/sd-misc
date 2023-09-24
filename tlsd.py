@@ -15,13 +15,13 @@ for arg in sys.argv[1:]:
    params[key]=value
 
 subprocess.run(f'git clone -b master --single-branch https://github.com/AUTOMATIC1111/stable-diffusion-webui {params["sd_dir"]}',shell=True)
- if(params['ckpt_url']):
+
+if(params['ckpt_url']):
   if(params['ckpt_url'].find('civitai')):    
    subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params["ckpt_dir"]} {params["ckpt_url"]}',shell=True)
-  elif(params['ckpt_url'].find('huggingface')):    
-   subprocess.run(f'aria2c --console-log-level=error -c -x 16 -s 16 -k 1M -d {params["ckpt_dir"]} -o {params["ckpt_name"]} {params["ckpt_url"]}',shell=True)
-  else:
+else:
    print('dowload default ckpt')
+ 
 def task1():
  start_time = time.time()
  subprocess.run(f'git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete {params["sd_dir"]}/extensions/a1111-sd-webui-tagcomplete',shell=True)
