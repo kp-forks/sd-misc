@@ -93,7 +93,7 @@ css_content = '''
 with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
-
+print(params['user_arguments'] )
 p_str = params['user_arguments'] + " --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 
 p_str+=" --theme='dark'"
