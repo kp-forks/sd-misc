@@ -94,7 +94,7 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
       cssFile.write(css_content)
 
 
-p_str = params['user_arguments'] + " --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
+p_str = params['user_arguments'] + " --listen --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 if params['ngrok']:
   p_str+=f"  --ngrok={params['ngrok']} --ngrok-region='auto'"
 
