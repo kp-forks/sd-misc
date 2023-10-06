@@ -95,7 +95,7 @@ with open(f'{params["sd_dir"]}/style.css', 'a') as cssFile:
 
 p_str = params['user_arguments'] + " --localtunnel --listen --disable-safe-unpickle --xformers --enable-insecure-extension-access --opt-sub-quad-attention --opt-channelslast --api"
 if params['ngrok']:
-  p_str+=f"  --ngrok={params['ngrok']} --ngrok-region='jp'"
+  p_str+=f"  --ngrok={params['ngrok']} --ngrok-region='auto'"
 
 p_str+=" --theme='dark'"
 print(p_str)
