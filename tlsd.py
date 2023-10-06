@@ -4,7 +4,6 @@ import sys
 import time
 import subprocess
 import shutil
-from IPython.display import clear_output
 
 params={}
 for arg in sys.argv[1:]:
@@ -101,6 +100,6 @@ if params['ngrok']:
 p_str+=" --theme='dark'"
 print(p_str)
 os.chdir(f'{params["sd_dir"]}')
-subprocess.run(f"python launch.py {p_str} --ui-settings-file {params['config_dir']} --styles-file {params['style_dir']} --lora-dir {params['lora_dir']} --ckpt-dir {params['ckpt_dir']} --ui-config-file {params['uiconfig_dir']}",shell=True)
+subprocess.run(f"python launch.py {p_str} --ckpt-dir {params['ckpt_dir']}",shell=True)
 
 
